@@ -92,17 +92,25 @@ const resetFilter = () => {
 }
 
 const saveImage = () => {
+    // Assuming previewImg is defined somewhere in your code
+    const previewImg = document.getElementById("previewImg");
+
+    // Assuming brightness, saturation, inversion, grayscale, rotate,
+    // flipHorizontal, and flipVertical are defined elsewhere in your code
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
+    
     canvas.width = previewImg.naturalWidth;
     canvas.height = previewImg.naturalHeight;
     
     ctx.filter = `brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`;
     ctx.translate(canvas.width / 2, canvas.height / 2);
+    
     if(rotate !== 0) {
         ctx.rotate(rotate * Math.PI / 180);
     }
-    ctx.scale(flipHorizontal, flipVertical);
+    
+    ctx.scale(flipHorizontal ? -1 : 1, flipVertical ? -1 : 1);
     ctx.drawImage(previewImg, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
     
     const link = document.createElement("a");
