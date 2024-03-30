@@ -97,6 +97,7 @@ const saveImage = () => {
     canvas.width = previewImg.naturalWidth;
     canvas.height = previewImg.naturalHeight;
 
+    // Apply filters to the canvas
     ctx.filter = `brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`;
     ctx.translate(canvas.width / 2, canvas.height / 2);
     if (rotate !== 0) {
@@ -105,6 +106,7 @@ const saveImage = () => {
     ctx.scale(flipHorizontal, flipVertical);
     ctx.drawImage(previewImg, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
 
+    // Convert canvas to data URL and download
     const link = document.createElement("a");
     link.download = "image.jpg";
     link.href = canvas.toDataURL();
