@@ -107,11 +107,10 @@ const saveImage = () => {
 
     // Draw the preview image onto the canvas
     ctx.drawImage(previewImg, -previewImg.width / 2, -previewImg.height / 2);
-
-    // Convert canvas to data URL and download
+    
     const link = document.createElement("a");
     link.download = "image.jpg";
-    link.href = canvas.toDataURL();
+    link.href = previewImg.src;
     link.click();
 }
 
